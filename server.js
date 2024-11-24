@@ -1,8 +1,5 @@
 const express = require("express");
 const router = require("./routers/Router");
-
-const uri = "https://api.openai.com/v1/chat/completions";
-
 const app = express();
 
 app.listen(3000, () => {
