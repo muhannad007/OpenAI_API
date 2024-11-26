@@ -1,6 +1,7 @@
 const express = require("express");
 const functions = require("firebase-functions");
 const { defineSecret } = require("firebase-functions/params");
+const { onCall } = require("firebase-functions/v2/https");
 const cors = require("cors");
 const router = require("./routers/Router");
 require("dotenv").config();
