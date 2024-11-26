@@ -1,5 +1,5 @@
 const express = require("express");
-const functions = require("firebase-functions");
+// const functions = require("firebase-functions");
 const { defineSecret } = require("firebase-functions/params");
 const { onCall } = require("firebase-functions/v2/https");
 const cors = require("cors");
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", router);
 
-exports.app = functions.https.onCall(
+exports.app = onCall(
   { enforceAppCheck: true, secrets: [openAiDevKeySecret] },
   app
 );
