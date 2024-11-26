@@ -2,11 +2,11 @@ const axios = require("axios");
 require("dotenv").config({
   path: "./.env",
 });
-// const { defineSecret } = require("firebase-functions/params");
-
-// const openAiDevKeySecret = defineSecret("openAiDevKey");
+const { defineSecret } = require("firebase-functions/params");
 
 const { API_KEY, AI_MODEL, URI } = process.env;
+
+const openAiDevKeySecret = defineSecret(API_KEY);
 
 const controller = async (req, res) => {
   // Extract the prompt from the client data
@@ -73,8 +73,8 @@ const controller = async (req, res) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-          //   Authorization: `Bearer ${await openAiDevKeySecret.value()}`, // Ensure proper retrieval of the secret
+          // Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${await openAiDevKeySecret.value()}`, // Ensure proper retrieval of the secret
         },
       }
     );
