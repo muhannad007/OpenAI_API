@@ -1,12 +1,10 @@
 const axios = require("axios");
-require("dotenv").config({
-  path: "./.env",
-});
 const { defineSecret } = require("firebase-functions/params");
 
-const { API_KEY, AI_MODEL, URI } = process.env;
+const openAiDevKeySecret = defineSecret("openAiDevKey");
 
-const openAiDevKeySecret = defineSecret(API_KEY);
+const aiModel = "gpt-4-2024-08-06";
+const apiEndPoint = "https://api.openai.com/v1/chat/completions";
 
 const controller = async (req, res) => {
   // Extract the prompt from the client data
@@ -21,9 +19,9 @@ const controller = async (req, res) => {
   try {
     // Make a request to the OpenAI API
     const response = await axios.post(
-      URI,
+      apiEndPoint,
       {
-        model: AI_MODEL,
+        model: aiModel,
         messages: [
           {
             role: "system",
